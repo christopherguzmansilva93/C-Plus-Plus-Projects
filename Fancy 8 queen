@@ -1,0 +1,106 @@
+//Fancy 8 queens
+#include <iostream>
+#include <cmath>
+#include <cstdlib>
+
+#define underline "\033[4m"
+#define underlineOff "\033[0m"
+using namespace std;
+
+bool check(int arr[],int col){
+    for(int i = 0; i < col; i++){ //verifying the row to the left
+        if ( arr[i] == arr[col] || (col-i) == abs(arr[col]-arr[i])) return false;
+    }
+    return true;
+}
+
+void backTrack(int arr[], int &col) {
+    col--;
+    if (col != -1) {
+        arr[col]++; 
+    }
+}
+
+void print(int arr[], int &count){
+  count++;
+  cout << underline << "Possible outcome number: " << count << underlineOff << endl;
+    int i, j, k, l;
+    typedef string box[4][7];
+    box bb, wb, *board[8][8];
+
+    for(i=0;i<4;i++){
+        for(j=0;j<7;j++){
+            wb[i][j]= " ";//this is the set up for white box to be printed
+            bb[i][j] = "\u2588";//this is the set up for black box to be printed
+        }
+    }
+    box bq= {
+            {"\u2588", "\u2588", "\u2588", "\u2588", "\u2588", "\u2588", "\u2588"},
+            {"\u2588", " ", "\u2588", " ", "\u2588", " ", "\u2588"},
+            {"\u2588", " ", " ", " ", " ", " ", "\u2588"},
+            {"\u2588", "\u2588", "\u2588", "\u2588", "\u2588", "\u2588", "\u2588"}
+            }; // this is the set up for black queen to be printed
+    box wq= {
+            {" ", " ", " ", " ", " ", " ", " "},
+            {" ", "\u2588", " ", "\u2588", " ", "\u2588", " "},
+            {" ", "\u2588", "\u2588", "\u2588", "\u2588", "\u2588", " "},
+            {" ", " ", " ", " ", " ", " ", " "}
+            }; // this is the set up for white queen to be printed
+    for(i=0;i<8;i++){
+        for(j=0;j<8;j++){
+            if ((i+j)%2==0 && arr[j] == i) board[i][j]= &wq; //if its even and has a queen in it that it will print the white queen
+            else if((i+j)%2==0) board[i][j]= &wb;//if it's only even than it prints white box
+            else if (arr[j] == i) board[i][j]= &bq;//if its has a queen but wasnt printed as result of not being even it will print black queen
+            else board[i][j]= &bb;//if all the other conditions fail, it will print black box
+        }
+    }
+    cout<< "  ";
+    for(i=0;i<7*8;i++) cout<<"▁";
+    cout << endl;
+    for(i=0;i<8;i++){
+        for(k=0;k<4;k++){
+            cout<<" "<<"|";
+            for(j=0; j<8;j++){
+                for(l=0;l<7;l++) cout<< (*board[i][j])[k][l];
+            }
+            cout<<"|"<<endl;
+        }
+    }
+    cout<< "  ";
+    for(i=0;i<7*8;i++) cout << "─";
+    cout<< endl;
+}
+
+int main() {
+    int board[8]={0}, col = 0;
+    //put the queen in the upper left square
+    board[0] = 0; //b[0][0] = 1 in 2D version
+
+    int count = 0;
+
+    while(col > -1){// if we backtrack beyond the first col, we are done
+        // if we have moved beyond the last column
+
+        if(col == 8){
+            print(board, count); // print the board
+            backTrack(board, col);// backtrack
+        }
+
+        // If we have moved beyond the last row 
+        else if(board[col] == 8){
+            board[col]= 0;// reset queen
+            backTrack(board, col); // backtrack
+        }
+
+        // Check if the placed queen is ok.
+
+        else if(check(board, col)){
+            col++; // move to next column if ok
+        } 
+        else{
+            board[col]++;// move to next row if not ok
+        }
+    }
+
+    return 0;
+}
