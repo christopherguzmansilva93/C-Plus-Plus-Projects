@@ -1,0 +1,62 @@
+
+/*Assignment
+Write a program that prints the shape shown below. You may use output statements that print either a
+single asterisk (*) or a single blank. Maximize your use of repetition (with nested for or while structures)
+and minimize the number of output statements.*/
+# include <iostream>
+using namespace std;
+int main() {
+ 
+int n = 6;
+ 
+ 
+for ( int i = 1; i <= n; i++){ 
+// This is for the first part of the triangle patter
+ 
+// I first indicated the amount of space needed for the patter 
+ 
+for (int j = i; j<= n; j++){
+ 
+cout << " ";
+ 
+}
+ 
+for (int j = i; j<= n; j++){ 
+// I executed the upper part of the patter
+ 
+cout << "*";
+ 
+}
+ 
+cout << endl;
+ 
+}
+ 
+ // the lower part of the patter
+ 
+for ( int i = 2; i <= n; i++){ 
+// This is for the second part of the lower triangle patter
+ 
+ 
+for (int j = 1; j<= i; j++){ 
+// once again indicated the amount of space needed for the patter 
+ 
+cout << " ";
+ 
+} 
+ 
+ 
+for (int j = 1; j<= i; j++){ 
+// I executed the lower part of the patter
+ 
+cout << "*";
+ 
+}
+ 
+ 
+cout << endl;
+ 
+}
+ 
+ 
+return 0;
