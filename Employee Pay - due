@@ -1,0 +1,121 @@
+
+/*from book) An employee is paid at a rate of $16.78 per hour for regular hours worked in a week. Any
+hours over that are paid at the overtime rate of one and one-half times that. From the worker’s gross
+pay, 6% is withheld for Social Security tax, 14% is withheld for federal income tax, 5% is withheld for
+state income tax, and $10 per week is withheld for union dues. Write a program that will read in the
+number of hours worked in a week and will then output the worker’s gross pay, each withholding
+amount, and the net take-home pay for the week.*/
+# include <iostream>
+# include <iomanip>
+using namespace std;
+int main () {
+ 
+ 
+cout <<fixed; 
+ 
+cout << setprecision(2); 
+// this set the all numerical outputs to 2 decimal points
+ 
+ 
+double hoursWorked; 
+ 
+cout << "Please enter hours worked: "; 
+// Asking the user for the number of hours worked 
+ 
+cin >> hoursWorked;
+ 
+cout << endl <<"hours worked: "<< hoursWorked << endl; // display the hours worked
+ 
+cout << endl << "regular pay rate: 16.78" << endl; 
+// display the Hourly rate of pay
+ 
+ 
+ 
+double overTime; 
+ 
+double grossPay;
+ 
+ 
+if(hoursWorked >= 40){ 
+// If the user enters more than or equal to 40 it will execute the 
+code 
+ 
+overTime = hoursWorked - 40;
+ 
+cout<< endl << "overtime hours worked: " << overTime << endl; // display overtime hours worked
+ 
+hoursWorked = 40 * 16.78; 
+ 
+overTime = overTime * 25.17;
+ 
+grossPay = hoursWorked + overTime;
+ 
+cout << endl << "gross pay: " << grossPay << endl; 
+// display the gross pay
+ 
+}
+ 
+ 
+else { 
+// If the user enters less than 40 it will execute thi code insted
+ 
+hoursWorked = hoursWorked * 16.78;
+ 
+grossPay = hoursWorked;
+ 
+cout << endl << "gross pay: " << grossPay << endl; 
+// display the gross pay 
+ 
+}
+ 
+ 
+ 
+double ficaTax;
+ 
+ficaTax = grossPay *0.06; 
+//How we get Social Security tax
+ 
+cout << endl << "FICA tax withheld: " << ficaTax << endl; 
+// display Social Security tax
+ 
+ 
+ 
+double federalIncomeTax;
+ 
+federalIncomeTax = grossPay * 0.14; 
+// How we get federal income tax
+ 
+cout << endl << "Federal Income Tax withheld: " << federalIncomeTax << endl; // display federal income tax
+ 
+ 
+ 
+double stateTax;
+ 
+stateTax = grossPay * 0.05; 
+// How we get state tax 
+ 
+cout << endl << "State Tax withheld: " << stateTax << endl; 
+// display state tax
+ 
+ 
+ 
+int unionDues;
+ 
+unionDues = 10.00; 
+// union dues is a fixed number $10
+ 
+cout << endl << "Union Dues withheld: 10.00" << endl; 
+// display union dues
+ 
+ 
+ 
+double netPay;
+ 
+netPay = grossPay - ( ficaTax + federalIncomeTax + stateTax + unionDues); 
+// Finally the net pay which is the grosspay 
+ 
+cout << endl <<"Net Pay: " << netPay << endl; 
+// minus all the taxs plus union dues
+ 
+ 
+return 0;
