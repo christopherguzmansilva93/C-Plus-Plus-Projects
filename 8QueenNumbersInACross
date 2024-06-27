@@ -1,0 +1,71 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+// adjacent table and row check
+bool okAdjacent(int q[], int c){
+    static int checkArray[8][5] = {
+        {-1},
+        {0,-1},
+        {1,-1},
+        {0,1,2,-1},
+        {1,2,3,-1},
+        {2,4,-1},
+        {0,3,4,-1},
+        {3,4,5,6,-1},
+    };
+    for(int i = 0; i < c; i++){
+        if(q[c] == q[i])
+            return false;
+}
+    for (int i = 0; checkArray[c][i] != -1; i++){
+        if(q[checkArray[c][i]]+1 == q[c] || q[checkArray[c][i]]-1 == q[c])
+        return false;
+}
+  return true;
+}
+
+
+// Print the 4 solutions
+void printCross(int cross[]){
+   static int sol = 1;
+   cout << "Solutions#" << sol << ":" << endl;
+   cout << "  " << cross[1] << " " << cross[2] << endl;
+   cout << cross[0] << " " << cross[3] << " " << cross[4] << " " << cross[5] << endl;
+   cout << "  " << cross[6] << " " << cross[7] << endl;
+   cout << endl;
+   sol++;
+}
+
+int main() {
+   {
+    //use the same 1d 8 queens main function
+    int q[8] = {0} , col = 0 ;
+    q[col] = 1 ;
+    col++ ;
+    while( col >= 0 )
+    {
+        if( col > 7 )
+        {
+            printCross( q ) ;
+            col-- ;
+        }
+        else
+            q[col] = 0 ;
+        
+        while( col >= 0 && col < 8 )
+        {
+            q[col]++ ;
+            if( q[col] > 8 )
+                    col-- ;
+            else
+                if( okAdjacent( q, col ) ==  true )
+                {
+                    col++ ;
+                    break ;
+                }
+        }
+    }
+    return 0 ;
+}
+}
