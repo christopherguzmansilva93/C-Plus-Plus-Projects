@@ -1,0 +1,65 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+bool ok(int q[], int c);   // Ok function to check the queen
+void backtrack(int &c);    // backtracking function
+void print(int q[]);       // the queen print function
+
+int main() {
+    
+    int board[8]={0}, col  = 0;
+    
+     while (col >= 0) {      // End the loop if col is -1
+      if (col == 7) {        // when col = 7 print and backtrack
+         print(board);
+         --col;
+      }
+      else                   // else move to one before the first row of the next column
+         board[++col] = -1;
+         
+      while (col >= 0) {
+         ++board[col];            // go to the next row
+         if (board[col] == 8)     // If the column ends, backtrack
+            --col;
+         else if (ok(board, col)) // check if the queen is ok,if yes break, and start from the begining
+            break;
+      }
+   }
+   return 0;
+}
+
+
+bool ok(int q[], int c){
+        for(int i=0;i<c;i++){
+         if((q[i] == q[c]) || (abs(q[c] - q[i]) == (c - i)))
+         {   return false;
+         }
+       }
+         return true;
+    }
+
+void backtrack(int &c){
+        c--;
+        if(c==-1) exit(1);
+       }
+       
+void print(int q[]){
+    {  static int count =0;
+       count++;
+       int i,j,board[8][8]={0};
+       cout<<"solution #"<<count<<endl;
+       for( i=0;i<8;i++)
+       {
+         board[q[i]][i]=1;
+       }
+       
+       for(i=0;i<8;i++)
+        { for(j=0;j<8;j++)
+             cout<<board[i][j]<<" ";
+             
+           cout<<endl;
+        }
+       
+    }
+}
