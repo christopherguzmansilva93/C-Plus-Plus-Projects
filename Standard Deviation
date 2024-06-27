@@ -1,0 +1,62 @@
+
+#include <iostream>
+#include <cmath>
+using namespace std;
+//Function to find the Standar Deviation
+double standardDeviation(double []);
+int main()
+{
+ 
+double myArray[10];
+ 
+ 
+cout << "Enter 10 values: ";
+ 
+for ( int i = 0; i < 10; i++){
+ 
+cin >> myArray[i];
+ 
+} 
+ 
+cout << endl;
+ 
+// calling the Function back to find the standard Deviation
+ 
+ 
+cout << "The Standard Deviation is: " << standardDeviation(myArray); 
+ 
+ 
+return 0;
+}
+// This is how I found the Standar Deviation using the arrays
+// values from the user in main
+double standardDeviation(double a[]){
+ 
+ 
+double sum = 0.0;
+ 
+double standardDev = 0.0;
+ 
+double mean;
+//Finding the sum 
+ 
+for (int i = 0; i < 10; i++){
+ 
+sum += a[i];
+ 
+}
+// Getting the mean to be use in the calculations 
+ 
+mean = sum / 10;
+// Puting all the information together to calculate the standard Deviation 
+// using cmath libary
+ 
+for (int i = 0 ; i < 10; i++){
+ 
+standardDev += pow (a[i] - mean, 2); 
+ 
+}
+ 
+ 
+return sqrt (standardDev / 10);
+}
